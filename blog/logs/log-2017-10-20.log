@@ -1,0 +1,18 @@
+ERROR - 2017-10-20 09:10:58 --> 404 Page Not Found: /index
+ERROR - 2017-10-20 09:13:53 --> Severity: error --> Exception: Unable to locate the model you have specified: User_model C:\xampp\htdocs\web\system\core\Loader.php 344
+ERROR - 2017-10-20 09:14:25 --> Severity: Notice --> Undefined index: blog_news C:\xampp\htdocs\web\bukt\views\home.php 191
+ERROR - 2017-10-20 09:14:25 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\web\bukt\views\home.php 191
+ERROR - 2017-10-20 14:18:28 --> Severity: Notice --> Undefined index: slc_seach_on C:\xampp\htdocs\web\bukt\views\home.php 12
+ERROR - 2017-10-20 14:25:13 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:25:26 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:27:57 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:27:59 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:28:43 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:28:45 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 14:29:06 --> 404 Page Not Found: Vendors/multiple-select
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(bukt/views/header.php): failed to open stream: No such file or directory C:\xampp\htdocs\giarehon\blog\views\home.php 1
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(): Failed opening 'bukt/views/header.php' for inclusion (include_path='C:\xampp\php\PEAR') C:\xampp\htdocs\giarehon\blog\views\home.php 1
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(bukt/views/form_search.php): failed to open stream: No such file or directory C:\xampp\htdocs\giarehon\blog\views\home.php 8
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(): Failed opening 'bukt/views/form_search.php' for inclusion (include_path='C:\xampp\php\PEAR') C:\xampp\htdocs\giarehon\blog\views\home.php 8
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(bukt/views/footer.php): failed to open stream: No such file or directory C:\xampp\htdocs\giarehon\blog\views\home.php 13
+ERROR - 2017-10-20 22:55:59 --> Severity: Warning --> include(): Failed opening 'bukt/views/footer.php' for inclusion (include_path='C:\xampp\php\PEAR') C:\xampp\htdocs\giarehon\blog\views\home.php 13
