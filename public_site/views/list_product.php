@@ -1,5 +1,5 @@
 <h1 class="text-center" style="color:#CB2134"><?= $search_key ?></h1>
-<b style="color:#CB2134;"><i>Tìm thấy <?=count($products)?> kết quả</i></b>
+<b style="color:#CB2134;"><i>Tìm thấy <?= count($products) ?> kết quả</i></b>
 <div class="row productview">
     <?php foreach ($products as $product): ?>
         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
@@ -9,11 +9,15 @@
                         <img class="img-responsive lazy" data-src="<?= $product['image'] ?>"
                              style="height:200px;margin:auto;">
                     </a>
-                    <?php if ($product['brand'] == 'tiki') { ?>
+                    <?php if ($product['brand'] == 'tiki'): ?>
                         <a target="_blank" style="position: absolute;bottom: 0px;border-radius: 0px"
                            class="btn btn-info btn-xs"
                            href="http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=<?= urlencode('https://tiki.vn/') ?>">Tiki</a>
-                    <?php } ?>
+                    <?php elseif ($product['brand'] == 'lazada'): ?>
+                        <a target="_blank" style="position: absolute;bottom: 0px;border-radius: 0px"
+                           class="btn btn-warning btn-xs"
+                           href="http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=<?= urlencode('http://www.lazada.vn/') ?>">Lazada</a>
+                    <?php endif; ?>
                 </div>
                 <div class="col-name">
                     <a style="color:#000;" target="_blank" href="<?= $product['url'] ?>">

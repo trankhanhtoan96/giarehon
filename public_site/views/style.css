@@ -67,6 +67,7 @@ a:hover {
     margin: 0
 }
 
+/*product area*/
 .col-item{
     border: solid 1px #E1E1E1;
     background-color: #FFFFFF;
@@ -87,4 +88,82 @@ a:hover {
     border-top: solid 1px #e1e1e1;
     padding-top: 5px;
     padding-bottom:0px;
+}
+
+/* Coupon Button
+------------------------------*/
+/* Coupon Code */
+.coupon-button-type .coupon-deal, .coupon-button-type .coupon-print, .coupon-button-type .coupon-code {
+    line-height: 1;
+    padding: 14px 38px;
+    background: #CB2134;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    min-width: 195px;
+    text-align: center;
+}
+
+.coupon-button-type .coupon-deal:hover, .coupon-button-type .coupon-print:hover, .coupon-button-type .coupon-code:hover {
+    opacity: 0.9;
+}
+
+.coupon-button-type .coupon-deal {
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+.coupon-button-type .coupon-print {
+    padding: 14px 13px;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+.coupon-button-type .coupon-code {
+    color: #444444;
+    background: linear-gradient(315deg, rgba(0, 0, 0, 0.06) 10%, transparent 15%, transparent 35%, rgba(0, 0, 0, 0.06) 40%, rgba(0, 0, 0, 0.06) 60%, transparent 65%, transparent 85%, rgba(0, 0, 0, 0.06) 90%) repeat scroll 0 0/6px 6px transparent;
+    text-align: right;
+    padding: 10px 12px;
+    font-size: 20px;
+    border: 2px solid #DDDDDD;
+    position: relative;
+}
+
+.coupon-button-type .coupon-code .code-text {
+    text-transform: uppercase;
+}
+
+.coupon-button-type .coupon-code .get-code {
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: #CB2134;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 14px 15px 14px 14px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transition: all 0.5s ease;
+}
+
+.coupon-button-type .coupon-code .get-code:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 44px solid transparent;
+    border-left: 44px solid #CB2134;
+    position: absolute;
+    right: -44px;
+    top: 0;
+}
+
+.coupon-button-type .coupon-code .get-code:hover {
+    padding-right: 5px;
+    transition: all 0.5s ease;
 }

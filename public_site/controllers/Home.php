@@ -43,10 +43,9 @@ class Home extends CI_Controller
         $dataView = array();
         $searchArr = array(
             'tiki' => 'Tiki',
-            'lazada' => 'Lazada',
-            'nguyenkim' => 'Nguyễn Kim'
+            'lazada' => 'Lazada'
         );
-        $dataView['slc_search_on'] = getHtmlSelection($searchArr, array('tiki', 'lazada', 'nguyenkim'), array('multiple' => true, 'name' => 'search_on[]', 'class' => 'search_on'));
+        $dataView['slc_search_on'] = getHtmlSelection($searchArr, array(), array('multiple' => true, 'name' => 'search_on[]', 'class' => 'search_on'));
         $data = array(
             'meta_title' => $this->setting_model->get('page_title'),
             'meta_description' => $this->setting_model->get('page_description'),
@@ -67,10 +66,25 @@ class Home extends CI_Controller
             $data['search_key'] = $searchKey;
             foreach ($searchOns as $searchOn) {
                 if ($searchOn == 'tiki') {
-                    $html = file_get_contents('https://tiki.vn/search?q=' . urlencode($searchKey));
+                    //curl get data
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://tiki.vn/search?q=' . urlencode($searchKey));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+                    $html = curl_exec($ch);
+                    $curlHeader = curl_getinfo($ch);
+                    while ($curlHeader['http_code'] == '302') {
+                        curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                        $html = curl_exec($ch);
+                        $curlHeader = curl_getinfo($ch);
+                    }
+                    curl_close($ch);
+
+                    //xử lý data
                     preg_match_all('/<div data-seller-product-id="([^"]*)"   data-title="([^"]*)" data-price="([^"]*)" data-id="([^"]*)/', $html, $product);
                     preg_match_all('/<img class="product-image img-responsive" src="([^"]+)"/', $html, $images);
                     foreach ($product[4] as $i => $item) {
+                        if ($i == 20) break;
                         preg_match('/data-id="' . $item . '" href="([^"]+)"/', $html, $url);
                         $data['products'][] = array(
                             'name' => getExcerpt($product[2][$i], 0, 67),
@@ -81,13 +95,75 @@ class Home extends CI_Controller
                         );
                     }
                 }
+                if ($searchOn == 'lazada') {
+                    //curl get data
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'http://www.lazada.vn/catalog/?q=' . urlencode($searchKey));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+                    $html = curl_exec($ch);
+                    $curlHeader = curl_getinfo($ch);
+                    while ($curlHeader['http_code'] == '302') {
+                        curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                        $html = curl_exec($ch);
+                        $curlHeader = curl_getinfo($ch);
+                    }
+                    curl_close($ch);
+
+                    //xử lý data
+                    preg_match('/<script type="application\/ld\+json">(.+)<\/script>/', $html, $products);
+                    $products = json_decode(html_entity_decode($products[1]), true);
+                    $products = $products['itemListElement'];
+                    foreach ($products as $i => $product) {
+                        if ($i == 20) break;
+                        $data['products'][] = array(
+                            'name' => getExcerpt($product['name'], 0, 67),
+                            'image' => $product['image'],
+                            'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($product['url']),
+                            'brand' => 'lazada',
+                            'price' => (int)$product['offers']['price']
+                        );
+                    }
+                }
             }
-            $data['products'] = sortArrayKey($data['products'],'price');
+            $data['products'] = sortArrayKey($data['products'], 'price');
             $html = $this->load->view('list_product', $data, true);
         }
         echo json_encode(array(
             'success' => $success,
             'html' => $html
         ));
+    }
+
+    function ma_giam_gia($webpage)
+    {
+        $dataView = array();
+        $dataView['coupon'] = array();
+        $dataView['brand'] = '';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+        if ($webpage == 'lazada') {
+            $dataView['brand'] = 'Lazada';
+            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/lazada?coupon=yes');
+        }elseif($webpage=='tiki'){
+            $dataView['brand'] = 'Tiki';
+            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/tiki?coupon=yes');
+        }elseif($webpage=='adayroi'){
+            $dataView['brand'] = 'Adayroi';
+            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/adayroi?coupon=yes');
+        }
+        $coupon = curl_exec($ch);
+        curl_close($ch);
+        $coupon = json_decode(html_entity_decode($coupon), true);
+        if ($coupon['status'] == 1) {
+            $dataView['coupon'] = $coupon['data']['promotions'];
+        }
+        $data = array(
+            'meta_title' => "Mã giảm giá {$dataView['brand']} tháng" . date('m/Y'),
+            'meta_description' => "Mã giảm giá {$webpage} cập nhật thường xuyên",
+            'data' => $dataView
+        );
+        $this->load->view('coupon', $data);
     }
 }

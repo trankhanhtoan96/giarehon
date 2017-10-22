@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip({container: "body"});
+    $(".lazy").lazy();
 
     //hiệu ứngs effice cho màn hình lớn trên 750px
     if ($(window).width() > 750) {
@@ -65,5 +66,17 @@ $(document).ready(function () {
                 loading.hide();
             }
         });
+    });
+
+    //copy coupon
+    var openPopuped = false;
+    $('.coupon-button').on('click', function () {
+        if (openPopuped == false) {
+            window.open($(this).attr('data-link'));
+            alert('Mã giảm giá của bạn là: '+$(this).find('.code-text').text());
+            openPopuped = true;
+        } else {
+            alert('Mã giảm giá của bạn là: '+$(this).find('.code-text').text());
+        }
     });
 });

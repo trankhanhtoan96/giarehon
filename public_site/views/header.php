@@ -69,9 +69,9 @@
                         GIẢM GIÁ
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="<?= site_url('dich-vu-thanh-lap-doanh-nghiep.html') ?>"><i
+                        <li><a href="<?= site_url('ma-giam-gia/lazada.html') ?>"><i
                                     class="fa-chevron-circle-right fa"></i> LAZADA</a></li>
-                        <li><a href="<?= site_url('dich-vu-bao-cao-thue.html') ?>"><i
+                        <li><a href="<?= site_url('ma-giam-gia/tiki.html') ?>"><i
                                     class="fa-chevron-circle-right fa"></i> TIKI</a></li>
                     </ul>
                 </li>
