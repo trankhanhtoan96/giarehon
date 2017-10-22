@@ -29,7 +29,7 @@
     <link href="<?= base_url('vendors/font-awesome/css/font-awesome.min.css') ?>" type="text/css" rel="stylesheet">
 
     <!--custom css-->
-    <link href="<?= base_url(APPNAME . 'views/style.css') ?>" rel="stylesheet" type="text/css"/>
+    <link href="<?= base_url('public_site/views/style.css') ?>" rel="stylesheet" type="text/css"/>
 
     <!--spinner load-->
     <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/Spinner/Spinner.css') ?>"/>
@@ -42,7 +42,7 @@
     <script src="<?= base_url('vendors/multiple-select/multiple-select.js') ?>"></script>
 
     <!--custom script-->
-    <script src="<?= base_url(APPNAME . 'views/script.js') ?>"></script>
+    <script src="<?= base_url('public_site/views/script.js') ?>"></script>
 </head>
 <body>
 
@@ -87,7 +87,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" id="close_modal" data-dismiss="modal">&times;</button>
-                <?php include APPPATH . "views/form_search.php"; ?>
+                <?php include "public_site/views/form_search.php"; ?>
             </div>
         </div>
     </div>

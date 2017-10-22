@@ -110,8 +110,7 @@ $system_path = 'system';
  *
  * NO TRAILING SLASH!
  */
-$application_folder = 'blog';
-define('APPNAME', $application_folder . '/');
+$application_folder = 'public_site';
 
 /*
  *---------------------------------------------------------------
@@ -278,6 +277,12 @@ if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) 
 
 define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
 
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE CUSTOM CONFIG FILE
+ * --------------------------------------------------------------------
+ */
+require_once 'config.php';
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

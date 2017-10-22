@@ -33,23 +33,37 @@ $(document).ready(function () {
         width: '250px'
     });
 
-    $('#timkiem').on('click', function () {
+    $('.btn_timkiem').on('click', function () {
         var loading = new Spinner();
         loading.show('Đang xử lý...');
         $('#close_modal').click();
-
+        var thisForm = $(this).parent();
         //ajax xử lý tìm giá rẻ
-
+        $.ajax({
+            url: CI_language.site_url + '/home/search',
+            type: 'post',
+            async: true,
+            data: {
+                search_key: thisForm.find('.search_key').val(),
+                search_on: thisForm.find('.search_on').val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.success == 1) {
+                    $('.container_view').html(data.html);
+                    /*load anh*/
+                    $(".lazy").lazy();
+                    alertify.success('Đã xong!');
+                } else {
+                    alertify.error('Không có dữ liệu!');
+                }
+                loading.hide();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                alertify.error('Lỗi xử lý!');
+                loading.hide();
+            }
+        });
     });
-
-    /*load anh*/
-    $("img.lazy").lazyload({
-        threshold : 200,
-        effect : "fadeIn"
-    });
-    $(function() {
-        $("img.lazy").lazyload();
-    });
-
-
 });
