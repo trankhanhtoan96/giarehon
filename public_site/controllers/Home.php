@@ -59,10 +59,11 @@ class Home extends CI_Controller
     {
         $data = array();
         $success = 0;
-        if ($this->input->post('search_on',true) && $this->input->post('search_key',true)) {
+        $html = '';
+        if ($this->input->post('search_on', true) && $this->input->post('search_key', true)) {
             $success = 1;
-            $searchOns = $this->input->post('search_on',true);
-            $searchKey = $this->input->post('search_key',true);
+            $searchOns = $this->input->post('search_on', true);
+            $searchKey = $this->input->post('search_key', true);
             $data['search_key'] = $searchKey;
             foreach ($searchOns as $searchOn) {
                 if ($searchOn == 'tiki') {
@@ -76,16 +77,17 @@ class Home extends CI_Controller
                             'image' => $images[1][$i],
                             'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($url[1]),
                             'brand' => 'tiki',
-                            'price' => $product[3][$i]
+                            'price' => (int)$product[3][$i]
                         );
                     }
                 }
             }
+            $data['products'] = sortArrayKey($data['products'],'price');
             $html = $this->load->view('list_product', $data, true);
         }
         echo json_encode(array(
             'success' => $success,
-            'html'=>$html
+            'html' => $html
         ));
     }
 }
