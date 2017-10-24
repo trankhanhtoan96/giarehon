@@ -25,14 +25,16 @@
                     </p>
                 </div>
                 <div class="col-sm-3">
-                    <div class="coupon-detail coupon-button-type">
-                        <button
-                            data-link="http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=<?= urlencode($item['original_url']) ?>"
-                            type="button" class="coupon-button coupon-code">
-                            <span class="code-text"><?= explode(',', $item['coupon_code'])[0] ?></span>
-                            <span class="get-code">Xem Mã</span>
-                        </button>
-                    </div>
+                    <?php if (!empty($item['coupon_code'])): ?>
+                        <div class="coupon-detail coupon-button-type">
+                            <button
+                                data-link="http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=<?= urlencode($item['original_url']) ?>"
+                                type="button" class="coupon-button coupon-code">
+                                <span class="code-text"><?= explode(',', $item['coupon_code'])[0] ?></span>
+                                <span class="get-code">Xem Mã</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>

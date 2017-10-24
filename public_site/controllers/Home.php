@@ -35,6 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Blog_category_model blog_category_model
  * @property Email_model email_model
  * @property User_model user_model
+ * @property CI_Cache cache
  */
 class Home extends CI_Controller
 {
@@ -60,70 +61,82 @@ class Home extends CI_Controller
         $success = 0;
         $html = '';
         if ($this->input->post('search_on', true) && $this->input->post('search_key', true)) {
+            $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
             $success = 1;
             $searchOns = $this->input->post('search_on', true);
             $searchKey = $this->input->post('search_key', true);
             $data['search_key'] = $searchKey;
+            $data['products'] = array();
             foreach ($searchOns as $searchOn) {
                 if ($searchOn == 'tiki') {
-                    //curl get data
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'https://tiki.vn/search?q=' . urlencode($searchKey));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
-                    $html = curl_exec($ch);
-                    $curlHeader = curl_getinfo($ch);
-                    while ($curlHeader['http_code'] == '302') {
-                        curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                    if (!$dataCache = $this->cache->get('tiki_' . rewrite($searchKey))) {
+                        //curl get data
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'https://tiki.vn/search?q=' . urlencode($searchKey));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
                         $html = curl_exec($ch);
                         $curlHeader = curl_getinfo($ch);
-                    }
-                    curl_close($ch);
+                        while ($curlHeader['http_code'] == '302') {
+                            curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                            $html = curl_exec($ch);
+                            $curlHeader = curl_getinfo($ch);
+                        }
+                        curl_close($ch);
 
-                    //xử lý data
-                    preg_match_all('/<div data-seller-product-id="([^"]*)"   data-title="([^"]*)" data-price="([^"]*)" data-id="([^"]*)/', $html, $product);
-                    preg_match_all('/<img class="product-image img-responsive" src="([^"]+)"/', $html, $images);
-                    foreach ($product[4] as $i => $item) {
-                        if ($i == 20) break;
-                        preg_match('/data-id="' . $item . '" href="([^"]+)"/', $html, $url);
-                        $data['products'][] = array(
-                            'name' => getExcerpt($product[2][$i], 0, 67),
-                            'image' => $images[1][$i],
-                            'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($url[1]),
-                            'brand' => 'tiki',
-                            'price' => (int)$product[3][$i]
-                        );
+                        //xử lý data
+                        $dataCache = array();
+                        preg_match_all('/<div data-seller-product-id="([^"]*)"   data-title="([^"]*)" data-price="([^"]*)" data-id="([^"]*)/', $html, $product);
+                        preg_match_all('/<img class="product-image img-responsive" src="([^"]+)"/', $html, $images);
+                        foreach ($product[4] as $i => $item) {
+                            if ($i == 20) break;
+                            preg_match('/data-id="' . $item . '" href="([^"]+)"/', $html, $url);
+                            $dataCache[] = array(
+                                'name' => getExcerpt($product[2][$i], 0, 67),
+                                'image' => $images[1][$i],
+                                'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($url[1]),
+                                'brand' => 'tiki',
+                                'price' => (int)$product[3][$i]
+                            );
+                        }
+                        $this->cache->save('tiki_' . rewrite($searchKey), $dataCache, 300);
                     }
+                    $data['products'] = array_merge($data['products'], $dataCache);
                 }
                 if ($searchOn == 'lazada') {
-                    //curl get data
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'http://www.lazada.vn/catalog/?q=' . urlencode($searchKey));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
-                    $html = curl_exec($ch);
-                    $curlHeader = curl_getinfo($ch);
-                    while ($curlHeader['http_code'] == '302') {
-                        curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                    if (!$dataCache = $this->cache->get('lazada_' . rewrite($searchKey))) {
+                        //curl get data
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, 'http://www.lazada.vn/catalog/?q=' . urlencode($searchKey));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
                         $html = curl_exec($ch);
                         $curlHeader = curl_getinfo($ch);
-                    }
-                    curl_close($ch);
+                        while ($curlHeader['http_code'] == '302') {
+                            curl_setopt($ch, CURLOPT_URL, $curlHeader['redirect_url']);
+                            $html = curl_exec($ch);
+                            $curlHeader = curl_getinfo($ch);
+                        }
+                        curl_close($ch);
 
-                    //xử lý data
-                    preg_match('/<script type="application\/ld\+json">(.+)<\/script>/', $html, $products);
-                    $products = json_decode(html_entity_decode($products[1]), true);
-                    $products = $products['itemListElement'];
-                    foreach ($products as $i => $product) {
-                        if ($i == 20) break;
-                        $data['products'][] = array(
-                            'name' => getExcerpt($product['name'], 0, 67),
-                            'image' => $product['image'],
-                            'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($product['url']),
-                            'brand' => 'lazada',
-                            'price' => (int)$product['offers']['price']
-                        );
+                        //xử lý data
+                        $dataCache = array();
+                        preg_match('/<script type="application\/ld\+json">(.+)<\/script>/', $html, $products);
+                        $products = json_decode(html_entity_decode($products[1]), true);
+                        $products = $products['itemListElement'];
+                        foreach ($products as $i => $product) {
+                            if ($i == 20) break;
+                            $dataCache[] = array(
+                                'name' => getExcerpt($product['name'], 0, 67),
+                                'image' => $product['image'],
+                                'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($product['url']),
+                                'brand' => 'lazada',
+                                'price' => (int)$product['offers']['price']
+                            );
+                        }
+                        $this->cache->save('lazada_' . rewrite($searchKey), $dataCache, 300);
                     }
+                    $data['products'] = array_merge($data['products'], $dataCache);
                 }
             }
             $data['products'] = sortArrayKey($data['products'], 'price');
@@ -163,8 +176,8 @@ class Home extends CI_Controller
             preg_match_all('/<div class="local-mechanic-box box-mechanic-left tv-gaming"><a href="([^"]*)" class="local-mechanic-title" data-shopnow="true"><img src="([^"]*)/', $html, $matches);
             foreach ($matches[1] as $key => $item) {
                 $dataView['other_coupon'][] = array(
-                    'url'=>'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($item),
-                    'image'=>$matches[2][$key]
+                    'url' => 'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($item),
+                    'image' => $matches[2][$key]
                 );
             }
 
@@ -173,7 +186,7 @@ class Home extends CI_Controller
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
-            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/tiki?coupon=yes');
+            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/tiki');
             $coupon = curl_exec($ch);
             curl_close($ch);
         } elseif ($webpage == 'adayroi') {
@@ -182,6 +195,14 @@ class Home extends CI_Controller
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
             curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/adayroi?coupon=yes');
+            $coupon = curl_exec($ch);
+            curl_close($ch);
+        } elseif ($webpage == 'lotte') {
+            $dataView['brand'] = 'Lotte';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+            curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/lotte?coupon=yes');
             $coupon = curl_exec($ch);
             curl_close($ch);
         }

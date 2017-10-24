@@ -58,3 +58,4 @@ $route['lien-he.html'] = 'home/lien-he';
 $route['ma-giam-gia/lazada.html'] = 'home/ma_giam_gia/lazada';
 $route['ma-giam-gia/tiki.html'] = 'home/ma_giam_gia/tiki';
 $route['ma-giam-gia/adayroi.html'] = 'home/ma_giam_gia/adayroi';
+$route['ma-giam-gia/lotte.html'] = 'home/ma_giam_gia/lotte';

@@ -75,6 +75,8 @@
                                     class="fa-chevron-circle-right fa"></i> TIKI</a></li>
                         <li><a href="<?= site_url('ma-giam-gia/adayroi.html') ?>"><i
                                     class="fa-chevron-circle-right fa"></i> ADAYROI</a></li>
+                        <li><a href="<?= site_url('ma-giam-gia/lotte.html') ?>"><i
+                                    class="fa-chevron-circle-right fa"></i> LOTTE</a></li>
                     </ul>
                 </li>
 <!--                <li><a href="--><?//= site_url('lien-he.html') ?><!--">LIÊN HỆ</a></li>-->
