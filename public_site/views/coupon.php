@@ -29,12 +29,30 @@
                         <button
                             data-link="http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=<?= urlencode($item['original_url']) ?>"
                             type="button" class="coupon-button coupon-code">
-                            <span class="code-text"><?= explode(',',$item['coupon_code'])[0] ?></span>
+                            <span class="code-text"><?= explode(',', $item['coupon_code'])[0] ?></span>
                             <span class="get-code">Xem Mã</span>
                         </button>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
+    </div>
+    <div class="container">
+        <?php if (count($data['other_coupon']) > 0): ?>
+            <hr/>
+            <div class="row">
+            <?php $dem = 0;
+            foreach ($data['other_coupon'] as $item): $dem++; ?>
+                <div class="col-sm-2">
+                    <a href="<?= $item['url'] ?>">
+                        <img class="img-responsive lazy" data-src="<?= $item['image'] ?>"/>
+                    </a>
+                </div>
+                <?php if ($dem == 6): $dem = 0; ?>
+                    </div><br/><div class="row">
+                <?php endif; ?>
+            <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 <?php include 'public_site/views/footer.php'; ?>

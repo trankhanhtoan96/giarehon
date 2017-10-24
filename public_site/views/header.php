@@ -62,8 +62,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="<?= site_url('gioi-thieu.html') ?>">GIỚI THIỆU</a></li>
-                <li><a href="#" type="button" data-toggle="modal" data-target="#search_product">TÌM GIÁ RẺ</a></li>
+                <li><a href="<?= site_url() ?>">TRANG CHỦ</a></li>
+<!--                <li><a href="--><?//= site_url('gioi-thieu.html') ?><!--">GIỚI THIỆU</a></li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">MÃ
                         GIẢM GIÁ
@@ -73,22 +73,13 @@
                                     class="fa-chevron-circle-right fa"></i> LAZADA</a></li>
                         <li><a href="<?= site_url('ma-giam-gia/tiki.html') ?>"><i
                                     class="fa-chevron-circle-right fa"></i> TIKI</a></li>
+                        <li><a href="<?= site_url('ma-giam-gia/adayroi.html') ?>"><i
+                                    class="fa-chevron-circle-right fa"></i> ADAYROI</a></li>
                     </ul>
                 </li>
-                <li><a href="<?= site_url('lien-he.html') ?>">LIÊN HỆ</a></li>
+<!--                <li><a href="--><?//= site_url('lien-he.html') ?><!--">LIÊN HỆ</a></li>-->
             </ul>
         </div>
     </div>
 </nav>
 <div style="height: 70px;"></div>
-
-<div id="search_product" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" id="close_modal" data-dismiss="modal">&times;</button>
-                <?php include "public_site/views/form_search.php"; ?>
-            </div>
-        </div>
-    </div>
-</div>

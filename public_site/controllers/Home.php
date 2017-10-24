@@ -140,21 +140,51 @@ class Home extends CI_Controller
         $dataView = array();
         $dataView['coupon'] = array();
         $dataView['brand'] = '';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+        $dataView['other_coupon'] = array();
+
         if ($webpage == 'lazada') {
             $dataView['brand'] = 'Lazada';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
             curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/lazada?coupon=yes');
-        }elseif($webpage=='tiki'){
+            $coupon = curl_exec($ch);
+            curl_close($ch);
+
+            //other coupon
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://www.lazada.vn/khuyen-mai/');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+            $html = curl_exec($ch);
+            curl_close($ch);
+
+            $html = preg_replace(array('/\n/', '/>\s+</'), array(' ', '><'), $html);
+            preg_match_all('/<div class="local-mechanic-box box-mechanic-left tv-gaming"><a href="([^"]*)" class="local-mechanic-title" data-shopnow="true"><img src="([^"]*)/', $html, $matches);
+            foreach ($matches[1] as $key => $item) {
+                $dataView['other_coupon'][] = array(
+                    'url'=>'http://go.masoffer.net/v0/1qe-ASGgNDpj8RGa3MlQ_g?url=' . urlencode($item),
+                    'image'=>$matches[2][$key]
+                );
+            }
+
+        } elseif ($webpage == 'tiki') {
             $dataView['brand'] = 'Tiki';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
             curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/tiki?coupon=yes');
-        }elseif($webpage=='adayroi'){
+            $coupon = curl_exec($ch);
+            curl_close($ch);
+        } elseif ($webpage == 'adayroi') {
             $dataView['brand'] = 'Adayroi';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
             curl_setopt($ch, CURLOPT_URL, 'http://api.masoffer.com/promotions/adayroi?coupon=yes');
+            $coupon = curl_exec($ch);
+            curl_close($ch);
         }
-        $coupon = curl_exec($ch);
-        curl_close($ch);
         $coupon = json_decode(html_entity_decode($coupon), true);
         if ($coupon['status'] == 1) {
             $dataView['coupon'] = $coupon['data']['promotions'];
