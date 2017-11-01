@@ -99,7 +99,7 @@ class Home extends CI_Controller
                                 'price' => (int)$product[3][$i]
                             );
                         }
-                        $this->cache->save('tiki_' . rewrite($searchKey), $dataCache, 300);
+                        $this->cache->save('tiki_' . rewrite($searchKey), $dataCache, 3600);
                     }
                     $data['products'] = array_merge($data['products'], $dataCache);
                 }
@@ -134,7 +134,7 @@ class Home extends CI_Controller
                                 'price' => (int)$product['offers']['price']
                             );
                         }
-                        $this->cache->save('lazada_' . rewrite($searchKey), $dataCache, 300);
+                        $this->cache->save('lazada_' . rewrite($searchKey), $dataCache, 3600);
                     }
                     $data['products'] = array_merge($data['products'], $dataCache);
                 }
