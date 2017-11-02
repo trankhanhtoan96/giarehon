@@ -1,0 +1,61 @@
+ERROR - 2017-10-24 22:22:16 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:02:26 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:02:27 --> Severity: Notice --> Undefined index: products C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 103
+ERROR - 2017-10-24 23:02:27 --> Severity: Warning --> array_merge(): Argument #1 is not an array C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 103
+ERROR - 2017-10-24 23:02:32 --> Severity: Warning --> array_merge(): Argument #1 is not an array C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 138
+ERROR - 2017-10-24 23:02:32 --> Severity: 4096 --> Argument 1 passed to sortArrayKey() must be of the type array, null given, called in C:\xampp\htdocs\giarehon\public_site\controllers\Home.php on line 141 and defined C:\xampp\htdocs\giarehon\system\helpers\custom_helper.php 157
+ERROR - 2017-10-24 23:02:32 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\giarehon\system\helpers\custom_helper.php 162
+ERROR - 2017-10-24 23:03:44 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:05:20 --> Severity: Notice --> Undefined index: products C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 103
+ERROR - 2017-10-24 23:05:20 --> Severity: Warning --> array_merge(): Argument #1 is not an array C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 103
+ERROR - 2017-10-24 23:05:32 --> Severity: Warning --> array_merge(): Argument #1 is not an array C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 138
+ERROR - 2017-10-24 23:06:32 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:06:38 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:08:31 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:09:12 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:09:16 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:09:22 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:10:18 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:10:20 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:10:36 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:10:48 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:10:52 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:11:16 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:11:19 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:11:21 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:13:35 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:13:39 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:13:47 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:13:50 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:13:53 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:14:59 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:22 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:25 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:29 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:32 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:34 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:36 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:38 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:39 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:41 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:42 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:44 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:45 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:46 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:48 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:49 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:51 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:52 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:53 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:55 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:56 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:58 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:16:59 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:17:00 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:11 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:20 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:22 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:33 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:35 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:40 --> Cache: Failed to initialize APC; extension not loaded/enabled?
+ERROR - 2017-10-24 23:23:41 --> Cache: Failed to initialize APC; extension not loaded/enabled?

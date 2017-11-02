@@ -1,0 +1,7 @@
+ERROR - 2017-10-23 09:51:31 --> Severity: Notice --> Undefined index: slc_search_on C:\xampp\htdocs\giarehon\public_site\views\form_search.php 3
+ERROR - 2017-10-23 09:51:45 --> Severity: Notice --> Undefined index: slc_search_on C:\xampp\htdocs\giarehon\public_site\views\form_search.php 3
+ERROR - 2017-10-23 09:52:55 --> Severity: Notice --> Undefined variable: searchArr C:\xampp\htdocs\giarehon\public_site\controllers\Home.php 143
+ERROR - 2017-10-23 09:52:55 --> Severity: 4096 --> Argument 1 passed to getHtmlSelection() must be of the type array, null given, called in C:\xampp\htdocs\giarehon\public_site\controllers\Home.php on line 143 and defined C:\xampp\htdocs\giarehon\system\helpers\custom_helper.php 23
+ERROR - 2017-10-23 09:52:55 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\giarehon\system\helpers\custom_helper.php 31
+ERROR - 2017-10-23 09:59:42 --> 404 Page Not Found: Home/lien-he
+ERROR - 2017-10-23 09:59:45 --> 404 Page Not Found: Home/gioi-thieu
